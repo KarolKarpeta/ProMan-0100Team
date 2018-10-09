@@ -30,4 +30,4 @@ let dom = {
         return elementToExtend.lastChild;
     }
     // here comes more features
-}
+};
