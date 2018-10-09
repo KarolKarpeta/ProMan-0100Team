@@ -19,7 +19,7 @@ let dom = {
         const el = document.createElement("div");
 
         el.id = "myDiv";
-        el.innerText = "Tekst w divie";
+        el.innerText = "Tekst w divie!!";
 
         div = document.getElementById("boards"); //pobieramy miejsce docelowe
         div.appendChild(el); //wstawiamy element do drzewa dokumentu
