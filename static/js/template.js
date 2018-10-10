@@ -10,6 +10,7 @@ let templates = {
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
                       ${board.title}
                     </button>
+                    <span id="plus" class="fas fa-plus float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
                   </h5>
                 </div>
         
