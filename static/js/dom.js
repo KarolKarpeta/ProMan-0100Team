@@ -7,8 +7,9 @@ let dom = {
         let addButton  = document.getElementById("newBoardButton");
         addButton.addEventListener("click", this.addNewBoard);
 
-        let createModal = document.getElementById("my-modal");
-        createModal.insertAdjacentHTML('beforeend', templates.getModal());
+        //MOVE TO SHOW BOARDS
+        // let createModal = document.getElementById("my-modal");
+        // createModal.insertAdjacentHTML('beforeend', templates.getModal());
     },
 
 
@@ -29,6 +30,9 @@ let dom = {
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
         console.log("board",board);
         }
+
+        let createModal = document.getElementById("my-modal");
+        createModal.insertAdjacentHTML('beforeend', templates.getModal());
     },
 
     addNewBoard: function(){
