@@ -14,6 +14,7 @@ let dataHandler = {
     _saveData: function() {
         // it is not called from outside
         // saves the data from this._data to local storage
+        localStorage.setItem(this.keyInLocalStorage, JSON.stringify(this._data));
     },
     init: function() {
         this._loadData();
@@ -43,9 +44,36 @@ let dataHandler = {
     getCard: function(cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
     },
+
+
+
+
+
+
+
+
+
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
+
+        const newId = this._data.boards.slice(-1)[0].id + 1;
+
+        const newBoard = {'id': newId, 'title': boardTitle, 'is_active': true};
+
+        console.log(newBoard);
+
+        this._data.boards.push(newBoard);
+        this._saveData();
+
+        console.log(this._data.boards);
+
+          callback(this._data.boards);
+        //callback(this._data.boards);
     },
+
+
+
+
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
     }

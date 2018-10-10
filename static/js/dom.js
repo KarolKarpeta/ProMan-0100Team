@@ -1,10 +1,18 @@
 // It uses data_handler.js to visualize elements
 let dom = {
+
+    eventHandler: function() {
+        console.log("TEST event Handler");
+
+        let addButton  = document.getElementById("newBoardButton");
+        addButton.addEventListener("click", this.addNewBoard)
+    },
+
+
     loadBoards: function() {
         // retrieves boards and makes showBoards called
         dataHandler.getBoards(this.showBoards);
     },
-
 
 
     showBoards: function(boards) {
@@ -12,23 +20,24 @@ let dom = {
         // it adds necessary event listeners also
 
         let boardList = document.getElementById("accordionExample");
-
-        console.log("tablice",boards);
+        boardList.innerHTML = '';
 
         for (let board of boards){
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
         console.log("board",board);
         }
-
-        // for (const ob in boards) {
-        //     console.log("Klucz: ", ob);
-        //     console.log("Wartość: ", boards[ob].title);
-        //
-
-
-
     },
 
+    addNewBoard: function(){
+
+            let inputText = document.getElementById("newBoardTitle").value;
+            console.log("input tekst", inputText);
+
+            //dataHandler.createNewBoard(newBoardTitle, dom.showBoards);
+            dataHandler.createNewBoard(inputText, dom.showBoards);
+
+            console.log("TEST");
+        },
 
     loadCards: function(boardId) {
         // retrieves cards and makes showCards called

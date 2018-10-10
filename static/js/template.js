@@ -7,13 +7,13 @@ let templates = {
         
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
                       ${board.title}
                     </button>
                   </h5>
                 </div>
         
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div id="collapseBoard-${board.id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
                         test 1
                   </div>
