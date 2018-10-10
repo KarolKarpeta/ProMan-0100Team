@@ -5,7 +5,10 @@ let dom = {
         console.log("TEST event Handler");
 
         let addButton  = document.getElementById("newBoardButton");
-        addButton.addEventListener("click", this.addNewBoard)
+        addButton.addEventListener("click", this.addNewBoard);
+
+        let createModal = document.getElementById("my-modal");
+        createModal.insertAdjacentHTML('beforeend', templates.getModal());
     },
 
 
