@@ -11,19 +11,19 @@ let dom = {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
 
-        console.log("SHOW BOARDS");
-        console.log(boards);
-
-
-        console.log(myObj.test());
-
         let boardList = document.getElementById("accordionExample");
-        boardList.insertAdjacentHTML('beforeend', "test test test ");
+
+        console.log("tablice",boards);
+
+        for (let board of boards){
+            boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
+        console.log("board",board);
+        }
 
         // for (const ob in boards) {
         //     console.log("Klucz: ", ob);
         //     console.log("Wartość: ", boards[ob].title);
-        // }
+        //
 
 
 

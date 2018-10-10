@@ -20,9 +20,9 @@ let dataHandler = {
     },
 
 
-    getBoards: function(showBoards) {
+    getBoards: function(callback) {
         // the boards are retrieved and then the callback function is called with the boards
-        showBoards(this._data.boards);
+        callback(this._data.boards);
 
     },
 
