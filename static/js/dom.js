@@ -42,6 +42,7 @@ let dom = {
             console.log("TEST");
         },
 
+
     loadCards: function(boardId) {
         // retrieves cards and makes showCards called
     },
