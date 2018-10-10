@@ -15,19 +15,15 @@ let dom = {
         console.log(boards);
 
 
+        console.log(myObj.test());
 
-        const el = document.createElement("div");
+        let boardList = document.getElementById("accordionExample");
+        boardList.insertAdjacentHTML('beforeend', "test test test ");
 
-        el.id = "myDiv";
-        el.innerText = "Tekst w divie!!";
-
-        div = document.getElementById("boards"); //pobieramy miejsce docelowe
-        div.appendChild(el); //wstawiamy element do drzewa dokumentu
-
-        for (const ob in boards) {
-            console.log("Klucz: ", ob);
-            console.log("Wartość: ", boards[ob].title);
-}
+        // for (const ob in boards) {
+        //     console.log("Klucz: ", ob);
+        //     console.log("Wartość: ", boards[ob].title);
+        // }
 
 
 
