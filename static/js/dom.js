@@ -12,7 +12,23 @@ let dom = {
         // createModal.insertAdjacentHTML('beforeend', templates.getModal());
     },
 
+    addNewBoard: function(){ // event handler function
 
+            let inputText = document.getElementById("newBoardTitle").value;
+
+            if(inputText === ""){
+                alert("PLEASE ADD FILL THE BOARD NAME!!!")
+            }
+            else{
+                dataHandler.createNewBoard(inputText, dom.showBoards);
+                document.getElementById("newBoardTitle").value = "";
+            }
+
+        },
+
+
+
+// ----------------------BOARDS --------------------
     loadBoards: function() {
         // retrieves boards and makes showBoards called
         dataHandler.getBoards(this.showBoards);
@@ -33,19 +49,12 @@ let dom = {
 
         let createModal = document.getElementById("my-modal");
         createModal.insertAdjacentHTML('beforeend', templates.getModal());
+
+
+
+
+// ----------------------CARDS --------------------
     },
-
-    addNewBoard: function(){
-
-            let inputText = document.getElementById("newBoardTitle").value;
-            console.log("input tekst", inputText);
-
-            //dataHandler.createNewBoard(newBoardTitle, dom.showBoards);
-            dataHandler.createNewBoard(inputText, dom.showBoards);
-
-            console.log("TEST");
-        },
-
 
     loadCards: function(boardId) {
         // retrieves cards and makes showCards called
