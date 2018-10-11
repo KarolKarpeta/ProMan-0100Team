@@ -74,7 +74,7 @@ let templates = {
                             <input class="form-control" id="user-input" name="input" type="text">
                           </div>
                           <div class="modal-footer">
-                            <button id="add-card-modal" type="button" class="btn btn-primary">Add card</button>
+                            <button id="add-card-modal" type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Add card</button>
                           </div>
                         </div>
                       </div>

@@ -6,7 +6,7 @@ let dom = {
         addButton.addEventListener("click", this.addNewBoard);
 
         let addCardModal = document.getElementById("add-card-modal");
-        addCardModal.addEventListener("click", this.addNewCard());
+        addCardModal.addEventListener("click", this.addNewCard);
 
     },
 
@@ -22,8 +22,7 @@ let dom = {
             }
         },
 
-    addNewCard: function(){
-        return function() {
+    addNewCard: function() {
             let inputText = document.getElementById("user-input").value;
             let boardId = document.getElementById("modal").dataset.boardId;
 
@@ -31,11 +30,10 @@ let dom = {
                 alert("PLEASE FILL THE BOARD NAME!!!")
             }
             else {
-                dataHandler.createNewCard(inputText, boardId, dom.showBoards);
+                dataHandler.createNewCard(inputText, boardId, dom.showCards);
+                document.getElementById("user-input").value = "";
             }
-        }
-
-    },
+        },
 
 
 
@@ -78,6 +76,7 @@ let dom = {
 
     loadCards: function(event) {
         // retrieves cards and makes showCards called
+        //console.log(event.target.dataset.boardId);
         boardId = parseInt(event.target.dataset.boardId);
         dataHandler.getCardsByBoardId(boardId, dom.showCards);
 
@@ -87,7 +86,6 @@ let dom = {
     showCards: function(cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        console.log("cards", cards.length);
 
         if(cards.length){
            //let board = document.getElementById(`collapseBoard-${cards[0].board_id}`);
@@ -100,11 +98,11 @@ let dom = {
             //console.log("board", board);
 
             for (let card of cards){
-            let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
-            let el = document.createElement("div")  ;
-            el.innerText = card.title;
-            el.classList.add("border");
-            statusDiv.appendChild(el);
+                let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
+                let el = document.createElement("div")  ;
+                el.innerText = card.title;
+                el.classList.add("border");
+                statusDiv.appendChild(el);
         }
         }
 
