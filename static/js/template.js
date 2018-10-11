@@ -22,28 +22,28 @@ let templates = {
                        <div class="card-deck">
                         
                               <div class="card border mb-3" style="max-width: 18rem;">
-                                  <div class="card-header bg-warning">In progress</div>
+                                  <div class="card-header bg-warning"><i class="fas fa-sign-in-alt"></i> &nbsp; NEW</div>
                                   <div id="board-${board.id}-status-1" class="card-body text-dark">
-                                            <!--content-->
+                                            <!--content-->   
                                   </div>
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
-                                  <div class="card-header bg-secondary">In progress</div>
+                                  <div class="card-header bg-secondary"><i class="fas fa-spinner"></i> &nbsp; IN PROGRESS</div>
                                   <div id="board-${board.id}-status-2" class="card-body text-dark">
                                             <!--content-->
                                   </div>
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
-                                  <div class="card-header bg-primary">In progress</div>
+                                  <div class="card-header bg-primary"><i class="far fa-comments"></i> &nbsp; TESTING</div>
                                   <div id="board-${board.id}-status-3" class="card-body text-dark">
-                                            <!--content-->
+                                            <!--content--> 
                                   </div>
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
-                                  <div class="card-header bg-success">In progress</div>
+                                  <div class="card-header bg-success"><i class="far fa-check-square"></i> &nbsp; DONE</div>
                                   <div id="board-${board.id}-status-4" class="card-body text-dark">
                                    
                                   </div>
