@@ -7,10 +7,10 @@ let templates = {
         
                 <div class="card-header" id="heading-${board.id}">
                   <h5 class="mb-0">
-                    <button class="btn btn-link board-${board.id}" data-board-id="${board.id} type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
-                      <i class="far fa-clipboard"></i> ${board.title}
+                    <button class="btn btn-link board-${board.id}" data-board-id="${board.id}" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="far fa-clipboard"></i> ${board.title}
                     </button>
-                    <span id="plus" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
+                    <span id="new-card-${board.id}" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
                   </h5>
                 </div>
         
@@ -67,7 +67,7 @@ let templates = {
                             <input class="form-control" id="user-input" name="input" type="text">
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Add card</button>
+                            <button id="add-card-modal" type="button" class="btn btn-primary">Add card</button>
                           </div>
                         </div>
                       </div>
