@@ -5,43 +5,50 @@ let templates = {
             return `  
                <div class="card board-${board.id}">
         
-                <div class="card-header" id="heading-${board.id}">
+                <div class="card-header">
                   <h5 class="mb-0">
-                    <button class="btn btn-link board-${board.id}" data-board-id="${board.id}" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
-                        <i class="far fa-clipboard"></i> ${board.title}
+
+                    <button id="heading-${board.id}" data-board-id="${board.id}" class="btn btn-link board-${board.id}" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
+                      <i class="far fa-clipboard"></i> ${board.title}
                     </button>
+                    
                     <span id="new-card-${board.id}" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
                   </h5>
                 </div>
         
                 <div id="collapseBoard-${board.id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div class="card-body">
-                  
-                  
+                                    
                        <div class="card-deck">
                         
-                          <div class="card border-secondary mb-3" style="max-width: 18rem;">
-                              <div class="card-header">New</div>
-                              <div id= class="card-body text-dark">
-                                <h5 class="card-title">Dark card title</h5>
-                                <p class="card-text">Some d's content.</p>
-                                
-                                                                
-                                
+                              <div class="card border mb-3" style="max-width: 18rem;">
+                                  <div class="card-header bg-warning">In progress</div>
+                                  <div id="board-${board.id}-status-1" class="card-body text-dark">
+                                            <!--content-->
+                                  </div>
                               </div>
-                          </div>
-                          
-                          
-                          <div class="card border-danger mb-3" style="max-width: 18rem;">
-                              <div class="card-header">In progress</div>
-                              <div class="card-body text-dark">
-                                <h5 class="card-title">Dark card title</h5>
-                                <p class="card-text">Some s content.</p>
+                              
+                              <div class="card border mb-3" style="max-width: 18rem;">
+                                  <div class="card-header bg-secondary">In progress</div>
+                                  <div id="board-${board.id}-status-2" class="card-body text-dark">
+                                            <!--content-->
+                                  </div>
                               </div>
-                          </div>
-                         
-                          
-                          
+                              
+                              <div class="card border mb-3" style="max-width: 18rem;">
+                                  <div class="card-header bg-primary">In progress</div>
+                                  <div id="board-${board.id}-status-3" class="card-body text-dark">
+                                            <!--content-->
+                                  </div>
+                              </div>
+                              
+                              <div class="card border mb-3" style="max-width: 18rem;">
+                                  <div class="card-header bg-success">In progress</div>
+                                  <div id="board-${board.id}-status-4" class="card-body text-dark">
+                                   
+                                  </div>
+                              </div>
+
                         </div>
                         
                         

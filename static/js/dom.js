@@ -53,12 +53,17 @@ let dom = {
 
         for (let board of boards){
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
+
             let newCardButton = $(`#new-card-${board.id}`);
             newCardButton.click(function (ev){
                 console.log(ev.target);
                 let modal = document.getElementById("modal");
                 modal.dataset.boardId = board.id;
             });
+
+            let boardAnchor = document.getElementById(`heading-${board.id}`);
+            boardAnchor.addEventListener('click', dom.loadCards);
+
         }
 
         let createModal = document.getElementById("my-modal");
@@ -73,25 +78,43 @@ let dom = {
 
     loadCards: function(event) {
         // retrieves cards and makes showCards called
+        boardId = parseInt(event.target.dataset.boardId);
+        dataHandler.getCardsByBoardId(boardId, dom.showCards);
 
-        let thatBoard = document.querySelector(`#board-${board.id}`);
-        console.log("BoardID",thatBoard);
-        dataHandler.getCardsByBoardId(thatBoard, this.showCards)
     },
 
 
     showCards: function(cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
+        console.log("cards", cards.length);
+
+        if(cards.length){
+           //let board = document.getElementById(`collapseBoard-${cards[0].board_id}`);
+
+            for(let stat=1; stat<=4; stat++){
+                div = document.getElementById(`board-${cards[0].board_id}-status-${stat}`);
+                div.innerText = "";
+            }
+
+            //console.log("board", board);
+
+            for (let card of cards){
+            let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
+            let el = document.createElement("div")  ;
+            el.innerText = card.title;
+            el.classList.add("border");
+            statusDiv.appendChild(el);
+        }
+        }
 
 
-    },
+        //let cardBody = document.querySelectorAll(".card-body");
+        //console.log("cardBody", cardBody);
 
 
 
-
-
-
+    }
 
 
 
