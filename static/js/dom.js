@@ -39,28 +39,39 @@ let dom = {
         for (let board of boards){
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
             console.log("board",board);
+
+            // let boardAnchor = document.querySelector(`#board-${board.id}`);
+            // console.log("BoardId", boardAnchor.dataset.boardId );
+            //
+            // boardAnchor.addEventListener('click', dom.loadCards);
         }
 
         let createModal = document.getElementById("my-modal");
         createModal.insertAdjacentHTML('beforeend', templates.getModal());
+
+
     },
 
 
 
 // ----------------------CARDS --------------------
 
-    loadCards: function(boardId) {
+    loadCards: function(event) {
         // retrieves cards and makes showCards called
-        let cardList = document.getElementById("accordionExample");
-        boardList.innerHTML = '';
+        //let thatBoard = document.querySelector(`#board-${board.id}`);
 
-        dataHandler.getCardsByBoardId(boardId, this.showCards)
+        //console.log("BoardID",board );
+
+
+        //dataHandler.getCardsByBoardId(boardId, this.showCards)
     },
 
 
     showCards: function(cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
+
+
     },
 
 

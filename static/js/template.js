@@ -3,11 +3,11 @@ let templates = {
 
         getAccordion: function(board){
             return `  
-               <div class="card">
+               <div class="card board-${board.id}">
         
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="heading-${board.id}">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-link board-${board.id}" data-board-id="${board.id} type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
                       <i class="far fa-clipboard"></i> ${board.title}
                     </button>
                     <span id="plus" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
@@ -15,8 +15,37 @@ let templates = {
                 </div>
         
                 <div id="collapseBoard-${board.id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                  <div id="${board.id}" class="card-body">
-                        test 1
+                  <div class="card-body">
+                  
+                  
+                       <div class="card-deck">
+                        
+                          <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                              <div class="card-header">New</div>
+                              <div id= class="card-body text-dark">
+                                <h5 class="card-title">Dark card title</h5>
+                                <p class="card-text">Some d's content.</p>
+                                
+                                                                
+                                
+                              </div>
+                          </div>
+                          
+                          
+                          <div class="card border-danger mb-3" style="max-width: 18rem;">
+                              <div class="card-header">In progress</div>
+                              <div class="card-body text-dark">
+                                <h5 class="card-title">Dark card title</h5>
+                                <p class="card-text">Some s content.</p>
+                              </div>
+                          </div>
+                         
+                          
+                          
+                        </div>
+                        
+                        
+                        
                   </div>
                 </div>
         
