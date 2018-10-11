@@ -24,7 +24,7 @@ let dom = {
 
     addNewCard: function() {
             let inputText = document.getElementById("user-input").value;
-            let boardId = document.getElementById("modal").dataset.boardId;
+            let boardId = parseInt(document.getElementById("modal").dataset.boardId);
 
             if (inputText === "") {
                 alert("PLEASE FILL THE BOARD NAME!!!")
@@ -103,7 +103,8 @@ let dom = {
                 el.innerText = card.title;
                 el.classList.add("border");
                 statusDiv.appendChild(el);
-        }
+            }
+            console.log("showCards");
         }
 
 

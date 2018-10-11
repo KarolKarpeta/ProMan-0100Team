@@ -42,9 +42,11 @@ let dataHandler = {
                 cardsById.push(card);
             }
         }
-        //console.log("Cards by ID =", cardsById);
+        console.log("getCardsByBoardId");
+        console.log("callback", callback);
 
-        callback(cardsById);
+        dom.showCards(cardsById);
+        //callback(cardsById);
     },
 
     getCard: function(cardId, callback) {
@@ -72,9 +74,11 @@ let dataHandler = {
         this._data.cards.push(newCard);
         this._saveData();
 
+        console.log("callback", callback);
+
 
         this.getCardsByBoardId(boardId, callback);
-
+        console.log("createNewCard");
     }
 
 };
