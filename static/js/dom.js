@@ -2,8 +2,6 @@
 let dom = {
 
     eventHandler: function() {
-        console.log("TEST event Handler");
-
         let addButton  = document.getElementById("newBoardButton");
         addButton.addEventListener("click", this.addNewBoard);
 
@@ -13,17 +11,15 @@ let dom = {
     },
 
     addNewBoard: function(){ // event handler function
-
             let inputText = document.getElementById("newBoardTitle").value;
 
             if(inputText === ""){
-                alert("PLEASE ADD FILL THE BOARD NAME!!!")
+                alert("PLEASE FILL THE BOARD NAME!!!")
             }
             else{
                 dataHandler.createNewBoard(inputText, dom.showBoards);
                 document.getElementById("newBoardTitle").value = "";
             }
-
         },
 
 
@@ -34,11 +30,9 @@ let dom = {
         dataHandler.getBoards(this.showBoards);
     },
 
-
     showBoards: function(boards) {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-
         let boardList = document.getElementById("accordionExample");
         boardList.innerHTML = '';
 
@@ -49,12 +43,11 @@ let dom = {
 
         let createModal = document.getElementById("my-modal");
         createModal.insertAdjacentHTML('beforeend', templates.getModal());
-
+    },
 
 
 
 // ----------------------CARDS --------------------
-    },
 
     loadCards: function(boardId) {
         // retrieves cards and makes showCards called

@@ -8,9 +8,9 @@ let templates = {
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
-                      ${board.title}
+                      <i class="far fa-clipboard"></i> ${board.title}
                     </button>
-                    <span id="plus" class="fas fa-plus float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
+                    <span id="plus" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
                   </h5>
                 </div>
         
