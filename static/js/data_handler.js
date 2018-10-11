@@ -11,22 +11,20 @@ let dataHandler = {
         // saves the data from this._data to local storage
         localStorage.setItem(this.keyInLocalStorage, JSON.stringify(this._data));
     },
+
     init: function() {
         this._loadData();
     },
 
-
     getBoards: function(callback) {
         // the boards are retrieved and then the callback function is called with the boards
         callback(this._data.boards);
-
     },
-
-
-
     getBoard: function(boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
     },
+
+
     getStatuses: function(callback) {
         // the statuses are retrieved and then the callback function is called with the statuses
     },
@@ -35,15 +33,9 @@ let dataHandler = {
     },
 
 
-
-
     getCardsByBoardId: function(boardId, callback) {
         // the cards are retrieved and then the callback function is called with the cards
     },
-
-
-
-
 
     getCard: function(cardId, callback) {
         // the card is retrieved and then the callback function is called with the card
@@ -70,9 +62,8 @@ let dataHandler = {
         callback(this._data.boards);
      },
 
-
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
     }
-    // here comes more features
+
 };

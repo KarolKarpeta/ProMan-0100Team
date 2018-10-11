@@ -15,7 +15,7 @@ let templates = {
                 </div>
         
                 <div id="collapseBoard-${board.id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                  <div class="card-body">
+                  <div id="${board.id}" class="card-body">
                         test 1
                   </div>
                 </div>

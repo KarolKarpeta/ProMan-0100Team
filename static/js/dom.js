@@ -38,7 +38,7 @@ let dom = {
 
         for (let board of boards){
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
-        console.log("board",board);
+            console.log("board",board);
         }
 
         let createModal = document.getElementById("my-modal");
@@ -51,6 +51,10 @@ let dom = {
 
     loadCards: function(boardId) {
         // retrieves cards and makes showCards called
+        let cardList = document.getElementById("accordionExample");
+        boardList.innerHTML = '';
+
+        dataHandler.getCardsByBoardId(boardId, this.showCards)
     },
 
 
@@ -83,6 +87,4 @@ let dom = {
     //
     //     return elementToExtend.lastChild;
     // }
-
-
 };
