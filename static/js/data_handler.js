@@ -42,13 +42,6 @@ let dataHandler = {
     },
 
 
-
-
-
-
-
-
-
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         const newId = this._data.boards.slice(-1)[0].id + 1;
@@ -62,8 +55,14 @@ let dataHandler = {
         callback(this._data.boards);
      },
 
-    createNewCard: function(cardTitle, boardId, statusId, callback) {
+    createNewCard: function(cardTitle, boardId, callback) {
         // creates new card, saves it and calls the callback function with its data
+        const newId = this._data.boards.slice(-1)[0].id + 1;
+        const newCard = {'id': newId, 'title': cardTitle, 'board_id': boardId, 'status_id': 1};
+        this._data.cards.push(newCard);
+        this._saveData();
+        callback(this._data.cards);
+
     }
 
 };
