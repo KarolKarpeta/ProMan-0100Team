@@ -53,12 +53,12 @@ let dom = {
 
         for (let board of boards){
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
-            console.log("board",board);
-
-            // let boardAnchor = document.querySelector(`#board-${board.id}`);
-            // console.log("BoardId", boardAnchor.dataset.boardId );
-            //
-            // boardAnchor.addEventListener('click', dom.loadCards);
+            let newCardButton = $(`#new-card-${board.id}`);
+            newCardButton.click(function (ev){
+                console.log(ev.target);
+                let modal = document.getElementById("modal");
+                modal.dataset.boardId = board.id;
+            });
         }
 
         let createModal = document.getElementById("my-modal");
