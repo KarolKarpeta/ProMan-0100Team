@@ -22,6 +22,21 @@ let dom = {
             }
         },
 
+    addNewCard: function(){
+        return function() {
+            let inputText = document.getElementById("user-input").value;
+            let boardId = document.getElementById("modal").dataset.boardId;
+
+            if (inputText === "") {
+                alert("PLEASE FILL THE BOARD NAME!!!")
+            }
+            else {
+                dataHandler.createNewCard(inputText, boardId, dom.showBoards);
+            }
+        }
+
+    },
+
 
 
 // ----------------------BOARDS --------------------
