@@ -5,9 +5,9 @@ let dom = {
         let addButton  = document.getElementById("newBoardButton");
         addButton.addEventListener("click", this.addNewBoard);
 
-        //MOVE TO SHOW BOARDS
-        // let createModal = document.getElementById("my-modal");
-        // createModal.insertAdjacentHTML('beforeend', templates.getModal());
+        let addCardModal = document.getElementById("add-card-modal");
+        addCardModal.addEventListener("click", this.addNewCard());
+
     },
 
     addNewBoard: function(){ // event handler function
