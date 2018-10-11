@@ -2,12 +2,32 @@
 let dom = {
 
     eventHandler: function() {
-        let addButton  = document.getElementById("newBoardButton");
+        let addButton = document.getElementById("newBoardButton");
         addButton.addEventListener("click", this.addNewBoard);
 
         let addCardModal = document.getElementById("add-card-modal");
         addCardModal.addEventListener("click", this.addNewCard);
 
+        let box = document.getElementById("hide");
+
+        box.addEventListener('change', function (e) {
+            console.log("zmieniam");
+            let atrib = document.querySelectorAll(".collapse");
+            console.log("atrib", atrib);
+
+            if (box.checked) {
+                console.log("zaznaczony");
+                for (let i = 0; i < atrib.length; i++) {
+                    atrib[i].setAttribute('data-parent', "#accordionExample");
+                }
+            }
+            else {
+                for (let i = 0; i < atrib.length; i++) {
+                    atrib[i].removeAttribute('data-parent');
+                }
+            }
+
+        })
     },
 
     addNewBoard: function(){ // event handler function
@@ -102,18 +122,18 @@ let dom = {
                 let el = document.createElement("div")  ;
                 el.innerText = card.title;
                 el.classList.add("border");
+                el.classList.add("text-center");
+
                 statusDiv.appendChild(el);
             }
-            console.log("showCards");
+            dom.showCardsCounter(cards[0].board_id);
         }
+    },
 
-
-        //let cardBody = document.querySelectorAll(".card-body");
-        //console.log("cardBody", cardBody);
-
-
-
-    }
+     showCardsCounter: function (boardId) {
+        let cardsCounterBadge = document.querySelector(`#header-${boardId} .badge`);
+        cardsCounterBadge.innerText = dataHandler.getCardsCountByBoard(boardId);
+    },
 
 
 

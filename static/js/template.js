@@ -5,14 +5,15 @@ let templates = {
             return `  
                <div class="card board-${board.id}">
         
-                <div class="card-header">
+                <div id="header-${board.id}" class="card-header">
                   <h5 class="mb-0">
 
                     <button id="heading-${board.id}" data-board-id="${board.id}" class="btn btn-link board-${board.id}" type="button" data-toggle="collapse" data-target="#collapseBoard-${board.id}" aria-expanded="true" aria-controls="collapseOne">
                       <i class="far fa-clipboard"></i> ${board.title}
                     </button>
                     
-                    <span id="new-card-${board.id}" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal"></span>
+                    <span id="new-card-${board.id}" class="far fa-plus-square float-right align-bottom" data-toggle="modal" data-target="#modal">&nbsp;</span>&nbsp;
+                    <span class="badge badge-pill badge-light float-right" title="Number of cards">&nbsp;</span> &nbsp;
                   </h5>
                 </div>
         
@@ -36,7 +37,7 @@ let templates = {
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
-                                  <div class="card-header bg-primary"><i class="far fa-comments"></i> &nbsp; TESTING</div>
+                                  <div class="card-header bg-info"><i class="far fa-comments"></i> &nbsp; TESTING</div>
                                   <div id="board-${board.id}-status-3" class="card-body text-dark">
                                             <!--content--> 
                                   </div>
