@@ -61,11 +61,12 @@ let dom = {
 
             let boardAnchor = document.getElementById(`heading-${board.id}`);
             boardAnchor.addEventListener('click', dom.loadCards);
-
+            dom.showCardsCounter(board.id);
         }
 
         let createModal = document.getElementById("my-modal");
         createModal.insertAdjacentHTML('beforeend', templates.getModal());
+
 
 
     },
@@ -86,7 +87,6 @@ let dom = {
     showCards: function(cards) {
         // shows the cards of a board
         // it adds necessary event listeners also
-
         if(cards.length){
            //let board = document.getElementById(`collapseBoard-${cards[0].board_id}`);
 

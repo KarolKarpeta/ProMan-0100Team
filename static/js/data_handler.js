@@ -23,8 +23,6 @@ let dataHandler = {
     getBoard: function(boardId, callback) {
         // the board is retrieved and then the callback function is called with the board
     },
-
-
     getStatuses: function(callback) {
         // the statuses are retrieved and then the callback function is called with the statuses
     },
@@ -79,6 +77,17 @@ let dataHandler = {
 
         this.getCardsByBoardId(boardId, callback);
         console.log("createNewCard");
-    }
+    },
+
+    getCardsCountByBoard: function(boardId) {
+        let counter = 0;
+        for (let card of this._data.cards){
+            if (card.board_id === boardId){
+                counter ++;
+            }
+        }
+        console.log("licze")
+        return counter
+    },
 
 };
