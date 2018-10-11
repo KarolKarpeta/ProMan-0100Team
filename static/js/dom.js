@@ -73,12 +73,10 @@ let dom = {
 
     loadCards: function(event) {
         // retrieves cards and makes showCards called
-        //let thatBoard = document.querySelector(`#board-${board.id}`);
 
-        //console.log("BoardID",board );
-
-
-        //dataHandler.getCardsByBoardId(boardId, this.showCards)
+        let thatBoard = document.querySelector(`#board-${board.id}`);
+        console.log("BoardID",thatBoard);
+        dataHandler.getCardsByBoardId(thatBoard, this.showCards)
     },
 
 
