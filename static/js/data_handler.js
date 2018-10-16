@@ -67,7 +67,9 @@ let dataHandler = {
 
     createNewCard: function(cardTitle, boardId, callback) {
         // creates new card, saves it and calls the callback function with its data
-        const newId = this._data.boards.slice(-1)[0].id + 1;
+        const newId = this._data.cards.slice(-1)[0].id + 1;
+
+
         const newCard = {'id': newId, 'title': cardTitle, 'board_id': parseInt(boardId), 'status_id': 1};
         this._data.cards.push(newCard);
         this._saveData();
@@ -86,8 +88,24 @@ let dataHandler = {
                 counter ++;
             }
         }
-        console.log("licze")
+        console.log("licze");
         return counter
     },
+
+
+    modifyStatus: function (cardId, newStatusId, newBoardId) {
+        for (let card of this._data.cards) {
+            if (cardId === card.id) {
+                card.status_id = newStatusId;
+                card.board_id = newBoardId;
+                dataHandler._saveData();
+                break;
+            }
+        }
+
+    }
+
+
+
 
 };
