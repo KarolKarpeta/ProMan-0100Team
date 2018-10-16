@@ -102,6 +102,27 @@ let dom = {
         dataHandler.getCardsByBoardId(boardId, dom.showCards);
 
     },
+// -------------------------DRAG & DROP ------------------------------
+    allowDrop: function(allowdropevent){
+        allowdropevent.target.style.color = 'blue';
+        allowdropevent.preventDefault();
+        },
+
+    drag: function(dragevent) {
+        dragevent.dataTransfer.setData("element-id", dragevent.target.id);
+        dragevent.target.style.color = 'green';
+    },
+
+    drop: function(dropevent, newStatus, newBoardId) {
+        dropevent.preventDefault();
+        var cardId = dropevent.dataTransfer.getData("element-id");
+        console.log("CardId",parseInt(cardId), cardId );
+        cardId = parseInt(cardId);
+
+        dataHandler.modifyStatus(cardId, newStatus, newBoardId);
+        dropevent.target.appendChild(document.getElementById(cardId));
+        dom.showCardsCounter(newBoardId);
+        },
 
 
     showCards: function(cards) {
@@ -115,11 +136,21 @@ let dom = {
                 div.innerText = "";
             }
 
-            //console.log("board", board);
-
+            // optymalize!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //
             for (let card of cards){
                 let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
+
+
                 let el = document.createElement("div")  ;
+
+                el.setAttribute('id', card.id);
+                el.setAttribute('status', card.status_id);
+
+                                el.setAttribute('draggable', 'true');
+                el.setAttribute('ondragstart', 'dom.drag(event)');
+
+
                 el.innerText = card.title;
                 el.classList.add("border");
                 el.classList.add("text-center");
