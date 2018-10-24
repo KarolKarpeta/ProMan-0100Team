@@ -1,4 +1,3 @@
-// It uses data_handler.js to visualize elements
 let dom = {
 
     eventHandler: function() {
@@ -11,12 +10,10 @@ let dom = {
         let box = document.getElementById("hide");
 
         box.addEventListener('change', function (e) {
-            console.log("zmieniam");
             let atrib = document.querySelectorAll(".collapse");
             console.log("atrib", atrib);
 
             if (box.checked) {
-                console.log("zaznaczony");
                 for (let i = 0; i < atrib.length; i++) {
                     atrib[i].setAttribute('data-parent', "#accordionExample");
                 }
@@ -26,11 +23,10 @@ let dom = {
                     atrib[i].removeAttribute('data-parent');
                 }
             }
-
         })
     },
 
-    addNewBoard: function(){ // event handler function
+    addNewBoard: function(){
             let inputText = document.getElementById("newBoardTitle").value;
 
             if(inputText === ""){
@@ -55,67 +51,43 @@ let dom = {
             }
         },
 
-    _boards: {},
 
-// ----------------------BOARDS --------------------
-//     loadBoards: function() {
-//         // retrieves boards and makes showBoards called
-//         dataHandler.getBoards(this.showBoards);
-//     },
-
-    showBoards: function() {
-        // shows boards appending them to #boards div
-        // it adds necessary event listeners also
-
+    getBoards: function() {
         let xhr = new XMLHttpRequest();
             xhr.open('GET', 'http://127.0.0.1:5000/get-boards', true);
             xhr.responseText = 'text';
 
             xhr.onload = function () {
                 let boards = JSON.parse(xhr.response);
-
-                let boardList = document.getElementById("accordionExample");
-                boardList.innerHTML = '';
-
-                for (let board of boards){
-                    boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
-
-                    let newCardButton = $(`#new-card-${board.id}`);
-                    newCardButton.click(function (ev){
-                        console.log(ev.target);
-                        let modal = document.getElementById("modal");
-                        modal.dataset.boardId = board.id;
-                    });
-
-                    let boardAnchor = document.getElementById(`heading-${board.id}`);
-                    console.log("test");
-                    boardAnchor.addEventListener('click', dom.showCards);
-                    dom.showCardsCounter(board.id);
-                }
-
+                dom.showBoards(boards);
             };
             xhr.send();
+    },
 
+    showBoards: function(boards) {
+        let boardList = document.getElementById("accordionExample");
+        boardList.innerHTML = '';
 
+        for (let board of boards){
+            boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
+
+            let newCardButton = $(`#new-card-${board.id}`);
+            newCardButton.click(function (ev){
+                let modal = document.getElementById("modal");
+                modal.dataset.boardId = board.id;
+            });
+
+            let boardAnchor = document.getElementById(`heading-${board.id}`);
+            boardAnchor.addEventListener('click', dom.showCards);
+            dom.showCardsCounter(board.id);
+        }
 
         let createModal = document.getElementById("my-modal");
         createModal.insertAdjacentHTML('beforeend', templates.getModal());
 
-
-
+        dom.eventHandler();
     },
 
-
-
-// ----------------------CARDS --------------------
-
-    // loadCards: function(event) {
-    //     // retrieves cards and makes showCards called
-    //     //console.log(event.target.dataset.boardId);
-    //     boardId = parseInt(event.target.dataset.boardId);
-    //     dataHandler.getCardsByBoardId(boardId, dom.showCards);
-    //
-    // },
 // -------------------------DRAG & DROP ------------------------------
     allowDrop: function(allowdropevent){
         allowdropevent.target.style.color = 'blue';
@@ -123,73 +95,61 @@ let dom = {
         },
 
     drag: function(dragevent) {
+        console.log("dragevent.target.board_id", dragevent.target.board_id);
+        console.log("dragevent.target.status", dragevent.target.status);
+        console.log("dragevent.target.id", dragevent.target.id);
+
         dragevent.dataTransfer.setData("element-id", dragevent.target.id);
+        dragevent.dataTransfer.setData("board-id", dragevent.target.board_id);
+
         dragevent.target.style.color = 'green';
     },
 
     drop: function(dropevent, newStatus, newBoardId) {
         dropevent.preventDefault();
         var cardId = dropevent.dataTransfer.getData("element-id");
-        console.log("CardId",parseInt(cardId), cardId );
-        cardId = parseInt(cardId);
+        let oldboardId = dropevent.dataTransfer.getData("board-id");
 
+        cardId = parseInt(cardId);
+        oldboardId = parseInt(oldboardId);
 
         let xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://127.0.0.1:5000/update-status', true);
             xhr.responseText = 'text';
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            // xhr.onreadystatechange = function() {//Call a function when the state changes.
-            //     console.log("State",this.readyState );
-            //     console.log("status",this.status );
-            // };
-
-
             xhr.onload = function () {
-                console.log(xhr.response);
-
                 dropevent.target.appendChild(document.getElementById(cardId));
                 dom.showCardsCounter(newBoardId);
+                dom.showCardsCounter(oldboardId);
             };
             xhr.send(`cardId=${cardId}&newStatus=${newStatus}&newBoardId=${newBoardId}`);
-
-
-
-        dataHandler.modifyStatus(cardId, newStatus, newBoardId);
-
         },
 
-
     showCards: function(event) {
-        // shows the cards of a board
-        // it adds necessary event listeners also
         boardId = parseInt(event.target.dataset.boardId);
-        console.log("boardId", boardId);
 
         let xhr = new XMLHttpRequest();
         xhr.open('GET', `http://127.0.0.1:5000/get-cards-board-id/${boardId}`, true);
         xhr.responseText = 'text';
 
-
         xhr.onload = function () {
             cards = JSON.parse(xhr.response);
-            console.log("Cards", cards);
+
             if (cards.length) {
-                //let board = document.getElementById(`collapseBoard-${cards[0].board_id}`);
 
                 for (let stat = 1; stat <= 4; stat++) {
                     div = document.getElementById(`board-${cards[0].board_id}-status-${stat}`);
                     div.innerText = "";
                 }
-
                 // optymalize!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //
                 for (let card of cards) {
                     let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
 
                     let el = document.createElement("div");
 
                     el.setAttribute('id', card.id);
+                    el.setAttribute('board_id', card.board_id);
                     el.setAttribute('status', card.status_id);
 
                     el.setAttribute('draggable', 'true');
@@ -208,26 +168,17 @@ let dom = {
     },
 
      showCardsCounter: function (boardId) {
-
         let xhr = new XMLHttpRequest();
         xhr.open('GET', `http://127.0.0.1:5000/get-counter-board-id/${boardId}`, true);
         xhr.responseText = 'text';
 
         xhr.onload = function () {
             counter = JSON.parse(xhr.response);
-            console.log("Counter", counter);
 
             let cardsCounterBadge = document.querySelector(`#header-${boardId} .badge`);
-            cardsCounterBadge.innerText = 777;
-
+            cardsCounterBadge.innerText = counter[0].howmany;
         };
-
-
         xhr.send();
-
     }
-
-
-
 
 };

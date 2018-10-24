@@ -28,9 +28,8 @@ def update_status(cursor, cardId, newStatus, newBoardId):
                     'WHERE id = %s;'.format(newStatus, newBoardId), (cardId,))
 
 
-
 @database_common.connection_handler
 def get_counter_by_board_id(cursor, boardId ):
-    cursor.execute('SELECT * FROM cards WHERE board_id = {};'.format(boardId))
+    cursor.execute('SELECT COUNT(*) as howMany FROM cards WHERE board_id = {};'.format(boardId))
     counter = cursor.fetchall()
     return counter
