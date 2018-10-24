@@ -31,30 +31,36 @@ let dom = {
     },
 
     addNewBoard: function(){ // event handler function
-            let inputText = document.getElementById("newBoardTitle").value;
+            let title = document.getElementById("newBoardTitle").value;
 
-            if(inputText === ""){
+            if(title === ""){
                 alert("PLEASE FILL THE BOARD NAME!!!")
             }
-            else{
-                dataHandler.createNewBoard(inputText, dom.showBoards);
-                document.getElementById("newBoardTitle").value = "";
+            else {
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:5000//add-board', true);
+            xhr.responseText = 'text';
+
+            xhr.onload = function () {
+                let board = JSON.parse(xhr.response);
             }
-        },
+        }
+        xhr.send();
+    },
 
     addNewCard: function() {
             let inputText = document.getElementById("user-input").value;
-            let boardId = parseInt(document.getElementById("modal").dataset.boardId);
 
             if (inputText === "") {
                 alert("PLEASE FILL THE BOARD NAME!!!")
             }
             else {
+
                 dataHandler.createNewCard(inputText, boardId, dom.showCards);
                 document.getElementById("user-input").value = "";
             }
         },
-
 
 
 // ----------------------BOARDS --------------------
@@ -62,6 +68,7 @@ let dom = {
 //         // retrieves boards and makes showBoards called
 //         dataHandler.getBoards(this.showBoards);
 //     },
+
 
     showBoards: function() {
         // shows boards appending them to #boards div

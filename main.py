@@ -10,8 +10,6 @@ def boards():
     print("USERS", data_manager.get_all_users())
     return render_template('boards.html')
 
-
-
 @app.route("/get-boards")
 def get_boards():
     boards = data_manager.get_all_boards()
