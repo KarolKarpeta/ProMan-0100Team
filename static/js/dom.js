@@ -55,7 +55,7 @@ let dom = {
             }
         },
 
-
+    _boards: {},
 
 // ----------------------BOARDS --------------------
 //     loadBoards: function() {
@@ -72,7 +72,7 @@ let dom = {
             xhr.responseText = 'text';
 
             xhr.onload = function () {
-                boards = JSON.parse(xhr.response);
+                let boards = JSON.parse(xhr.response);
 
                 let boardList = document.getElementById("accordionExample");
                 boardList.innerHTML = '';
@@ -137,10 +137,16 @@ let dom = {
         let xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://127.0.0.1:5000/update-status', true);
             xhr.responseText = 'text';
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            // xhr.onreadystatechange = function() {//Call a function when the state changes.
+            //     console.log("State",this.readyState );
+            //     console.log("status",this.status );
+            // };
+
 
             xhr.onload = function () {
                 console.log(xhr.response);
-
 
                 dropevent.target.appendChild(document.getElementById(cardId));
                 dom.showCardsCounter(newBoardId);
@@ -164,11 +170,6 @@ let dom = {
         xhr.open('GET', `http://127.0.0.1:5000/get-cards-board-id/${boardId}`, true);
         xhr.responseText = 'text';
 
-        xhr.onreadystatechange = function() {//Call a function when the state changes.
-            console.log("State",this.readyState );
-            console.log("status",this.status );
-
-        };
 
         xhr.onload = function () {
             cards = JSON.parse(xhr.response);
@@ -207,8 +208,23 @@ let dom = {
     },
 
      showCardsCounter: function (boardId) {
-        let cardsCounterBadge = document.querySelector(`#header-${boardId} .badge`);
-        cardsCounterBadge.innerText = dataHandler.getCardsCountByBoard(boardId);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://127.0.0.1:5000/get-counter-board-id/${boardId}`, true);
+        xhr.responseText = 'text';
+
+        xhr.onload = function () {
+            counter = JSON.parse(xhr.response);
+            console.log("Counter", counter);
+
+            let cardsCounterBadge = document.querySelector(`#header-${boardId} .badge`);
+            cardsCounterBadge.innerText = 777;
+
+        };
+
+
+        xhr.send();
+
     }
 
 

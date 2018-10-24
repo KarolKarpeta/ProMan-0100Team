@@ -26,3 +26,11 @@ def get_cards_by_board_id(cursor, boardId ):
 def update_status(cursor, cardId, newStatus, newBoardId):
     cursor.execute(' UPDATE cards SET status_id = {}, board_id = {} '
                     'WHERE id = %s;'.format(newStatus, newBoardId), (cardId,))
+
+
+
+@database_common.connection_handler
+def get_counter_by_board_id(cursor, boardId ):
+    cursor.execute('SELECT * FROM cards WHERE board_id = {};'.format(boardId))
+    counter = cursor.fetchall()
+    return counter
