@@ -38,6 +38,17 @@ def add_board():
     return "success"
 
 
+@app.route("/add-card", methods=["POST"])
+def add_card():
+    title = request.form["title"]
+    board_id = request.form["boardId"]
+    status_id = request.form["statusId"]
+    data_manager.add_card(title, board_id, status_id)
+
+    get_cards_by_board_id(board_id)
+    return "success"
+
+
 @app.route("/get-counter-board-id/<int:boardId>")
 def get_counter_by_board_id(boardId):
     print()
