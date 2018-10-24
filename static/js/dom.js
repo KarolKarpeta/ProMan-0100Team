@@ -11,7 +11,6 @@ let dom = {
 
         box.addEventListener('change', function (e) {
             let atrib = document.querySelectorAll(".collapse");
-            console.log("atrib", atrib);
 
             if (box.checked) {
                 for (let i = 0; i < atrib.length; i++) {
@@ -111,20 +110,21 @@ let dom = {
         },
 
     drag: function(dragevent) {
-        console.log("dragevent.target.board_id", dragevent.target.board_id);
-        console.log("dragevent.target.status", dragevent.target.status);
-        console.log("dragevent.target.id", dragevent.target.id);
+        //console.log("dragevent.target.board_id", dragevent.target.dataset.board_id);
 
         dragevent.dataTransfer.setData("element-id", dragevent.target.id);
-        dragevent.dataTransfer.setData("board-id", dragevent.target.board_id);
+        dragevent.dataTransfer.setData("board-id", dragevent.target.dataset.board_id);
 
-        dragevent.target.style.color = 'green';
+        //dragevent.target.style.color = 'green';
     },
 
     drop: function(dropevent, newStatus, newBoardId) {
         dropevent.preventDefault();
         var cardId = dropevent.dataTransfer.getData("element-id");
         let oldboardId = dropevent.dataTransfer.getData("board-id");
+
+        console.log("new - ", newBoardId );
+        console.log("old - ", oldboardId );
 
         cardId = parseInt(cardId);
         oldboardId = parseInt(oldboardId);
@@ -135,7 +135,10 @@ let dom = {
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             xhr.onload = function () {
-                dropevent.target.appendChild(document.getElementById(cardId));
+                let movedCard = document.getElementById(cardId);
+                movedCard.setAttribute('data-board_id', newBoardId);
+                dropevent.target.appendChild(movedCard);
+
                 dom.showCardsCounter(newBoardId);
                 dom.showCardsCounter(oldboardId);
             };
@@ -162,14 +165,20 @@ let dom = {
                 for (let card of cards) {
                     let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
                     let el = document.createElement("div");
+
                     el.setAttribute('id', card.id);
-                    el.setAttribute('board_id', card.board_id);
-                    el.setAttribute('status', card.status_id);
+                    el.dataset.board_id = card.board_id;
+                    //el.setAttribute('board_id', card.board_id);
+                    //el.setAttribute('status', card.status_id);
+
                     el.setAttribute('draggable', 'true');
                     el.setAttribute('ondragstart', 'dom.drag(event)');
+
                     el.innerText = card.title;
+
                     el.classList.add("border");
                     el.classList.add("text-center");
+
                     statusDiv.appendChild(el);
                 }
                 dom.showCardsCounter(cards[0].board_id);
