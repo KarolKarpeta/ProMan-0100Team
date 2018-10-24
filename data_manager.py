@@ -16,8 +16,8 @@ def get_all_boards(cursor):
 
 
 @database_common.connection_handler
-def get_cards_by_board_id(cursor, boardId ):
-    cursor.execute('SELECT * FROM cards WHERE board_id = {};'.format(boardId))
+def get_cards_by_board_id(cursor, board_id):
+    cursor.execute('SELECT * FROM cards WHERE board_id = {};'.format(board_id))
     cards = cursor.fetchall()
     return cards
 
@@ -38,7 +38,13 @@ def get_counter_by_board_id(cursor, boardId ):
 @database_common.connection_handler
 def add_board(cursor, title):
     cursor.execute ("""
-                    INSERT INTO boards
-                    (title)
-                    VALUES('{}');
+                    INSERT INTO boards (title)
+                    VALUES ('{}');
                     """.format(title))
+
+@database_common.connection_handler
+def add_card(cursor, title, board_id, status_id):
+    cursor.execute ("""
+                    INSERT INTO cards (title, board_id, status_id)
+                    VALUES ('{}','{}','{}');
+                    """.format(title, board_id, status_id))
