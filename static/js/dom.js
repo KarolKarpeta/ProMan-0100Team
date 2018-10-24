@@ -40,6 +40,9 @@ let dom = {
                 console.log(xhr.responseText);
                 }
             };
+            xhr.onload = function () {
+                dom.getBoards();
+            };
             xhr.send(`title=${title}`);
         }
 
@@ -122,9 +125,6 @@ let dom = {
         dropevent.preventDefault();
         var cardId = dropevent.dataTransfer.getData("element-id");
         let oldboardId = dropevent.dataTransfer.getData("board-id");
-
-        console.log("new - ", newBoardId );
-        console.log("old - ", oldboardId );
 
         cardId = parseInt(cardId);
         oldboardId = parseInt(oldboardId);
