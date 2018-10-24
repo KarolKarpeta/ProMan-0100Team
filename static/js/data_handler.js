@@ -1,6 +1,26 @@
 let dataHandler = {
     keyInLocalStorage: 'proman-data', // the string that you use as a key in localStorage to save your application data
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
+
+    _boards: {"1":"test"},
+
+    _setBoards(boards){
+        this._boards = boards;
+    },
+
+    // _loadBoards: function(){
+    //         let xhr = new XMLHttpRequest();
+    //         xhr.open('GET', 'http://127.0.0.1:5000/get-boards', true);
+    //         xhr.responseText = 'text';
+    //
+    //         xhr.onload = function () {
+    //             boards = JSON.parse(xhr.response);
+    //
+    //
+    //         };
+    //         xhr.send();
+    //  },
+
     _loadData: function() {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
@@ -14,6 +34,7 @@ let dataHandler = {
 
     init: function() {
         this._loadData();
+
     },
 
     getBoards: function(callback) {
@@ -88,7 +109,6 @@ let dataHandler = {
                 counter ++;
             }
         }
-        console.log("licze");
         return counter
     },
 
