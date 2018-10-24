@@ -33,6 +33,11 @@ def update_status():
 
     return "success"
 
+@app.route("/add-board")
+def add_board(title):
+    data_manager.add_board(title)
+    return "success"
+
 
 def main():
     app.run(debug=True)
