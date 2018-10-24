@@ -26,3 +26,12 @@ def get_cards_by_board_id(cursor, boardId ):
 def update_status(cursor, cardId, newStatus, newBoardId):
     cursor.execute(' UPDATE cards SET status_id = {}, board_id = {} '
                     'WHERE id = %s;'.format(newStatus, newBoardId), (cardId,))
+
+
+@database_common.connection_handler
+def add_board(cursor, title):
+    cursor.execute ("""
+                    INSERT INTO boards
+                    (title)
+                    VALUES('{}');
+                    """.format(title))
