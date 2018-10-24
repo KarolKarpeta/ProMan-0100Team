@@ -39,12 +39,8 @@ def add_board():
 
 @app.route("/get-counter-board-id/<int:boardId>")
 def get_counter_by_board_id(boardId):
-    print()
     counter = data_manager.get_counter_by_board_id(boardId)
-    print("Counter: ", counter)
     return jsonify(counter)
-
-
 
 
 
