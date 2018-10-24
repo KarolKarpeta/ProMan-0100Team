@@ -7,11 +7,11 @@ app = Flask(__name__)
 def boards():
     return render_template('boards.html')
 
+
 @app.route("/get-boards")
 def get_boards():
     boards = data_manager.get_all_boards()
     return jsonify(boards)
-
 
 
 @app.route("/get-cards-board-id/<int:boardId>")
@@ -28,6 +28,7 @@ def update_status():
 
     data_manager.update_status(cardId, newStatus, newBoardId)
     return "success"
+
 
 @app.route("/add-board", methods=["POST"])
 def add_board():
