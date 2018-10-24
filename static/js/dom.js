@@ -109,13 +109,13 @@ let dom = {
 
 // ----------------------CARDS --------------------
 
-    loadCards: function(event) {
-        // retrieves cards and makes showCards called
-        //console.log(event.target.dataset.boardId);
-        boardId = parseInt(event.target.dataset.boardId);
-        dataHandler.getCardsByBoardId(boardId, dom.showCards);
-
-    },
+    // loadCards: function(event) {
+    //     // retrieves cards and makes showCards called
+    //     //console.log(event.target.dataset.boardId);
+    //     boardId = parseInt(event.target.dataset.boardId);
+    //     dataHandler.getCardsByBoardId(boardId, dom.showCards);
+    //
+    // },
 // -------------------------DRAG & DROP ------------------------------
     allowDrop: function(allowdropevent){
         allowdropevent.target.style.color = 'blue';
@@ -133,69 +133,85 @@ let dom = {
         console.log("CardId",parseInt(cardId), cardId );
         cardId = parseInt(cardId);
 
+
+        let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:5000/update-status', true);
+            xhr.responseText = 'text';
+
+            xhr.onload = function () {
+                console.log(xhr.response);
+
+
+                dropevent.target.appendChild(document.getElementById(cardId));
+                dom.showCardsCounter(newBoardId);
+            };
+            xhr.send(`cardId=${cardId}&newStatus=${newStatus}&newBoardId=${newBoardId}`);
+
+
+
         dataHandler.modifyStatus(cardId, newStatus, newBoardId);
-        dropevent.target.appendChild(document.getElementById(cardId));
-        dom.showCardsCounter(newBoardId);
+
         },
 
 
-    showCards: function(cards) {
+    showCards: function(event) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        if(cards.length){
-           //let board = document.getElementById(`collapseBoard-${cards[0].board_id}`);
+        boardId = parseInt(event.target.dataset.boardId);
+        console.log("boardId", boardId);
 
-            for(let stat=1; stat<=4; stat++){
-                div = document.getElementById(`board-${cards[0].board_id}-status-${stat}`);
-                div.innerText = "";
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://127.0.0.1:5000/get-cards-board-id/${boardId}`, true);
+        xhr.responseText = 'text';
+
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
+            console.log("State",this.readyState );
+            console.log("status",this.status );
+
+        };
+
+        xhr.onload = function () {
+            cards = JSON.parse(xhr.response);
+            console.log("Cards", cards);
+            if (cards.length) {
+                //let board = document.getElementById(`collapseBoard-${cards[0].board_id}`);
+
+                for (let stat = 1; stat <= 4; stat++) {
+                    div = document.getElementById(`board-${cards[0].board_id}-status-${stat}`);
+                    div.innerText = "";
+                }
+
+                // optymalize!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //
+                for (let card of cards) {
+                    let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
+
+                    let el = document.createElement("div");
+
+                    el.setAttribute('id', card.id);
+                    el.setAttribute('status', card.status_id);
+
+                    el.setAttribute('draggable', 'true');
+                    el.setAttribute('ondragstart', 'dom.drag(event)');
+
+                    el.innerText = card.title;
+                    el.classList.add("border");
+                    el.classList.add("text-center");
+
+                    statusDiv.appendChild(el);
+                }
+                dom.showCardsCounter(cards[0].board_id);
             }
-
-            // optymalize!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //
-            for (let card of cards){
-                let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
-
-
-                let el = document.createElement("div")  ;
-
-                el.setAttribute('id', card.id);
-                el.setAttribute('status', card.status_id);
-
-                                el.setAttribute('draggable', 'true');
-                el.setAttribute('ondragstart', 'dom.drag(event)');
-
-
-                el.innerText = card.title;
-                el.classList.add("border");
-                el.classList.add("text-center");
-
-                statusDiv.appendChild(el);
-            }
-            dom.showCardsCounter(cards[0].board_id);
-        }
+        };
+        xhr.send();
     },
 
      showCardsCounter: function (boardId) {
         let cardsCounterBadge = document.querySelector(`#header-${boardId} .badge`);
         cardsCounterBadge.innerText = dataHandler.getCardsCountByBoard(boardId);
-    },
+    }
 
 
 
 
-    // appendToElement: function(elementToExtend, textToAppend, prepend = false) {
-    //     // function to append new DOM elements (represented by a string) to an existing DOM element
-    //     let fakeDiv = document.createElement('div');
-    //     fakeDiv.innerHTML = textToAppend.trim();
-    //
-    //     for (childNode of fakeDiv.childNodes) {
-    //         if (prepend) {
-    //             elementToExtend. prependChild(childNode);
-    //         } else {
-    //             elementToExtend.appendChild(childNode);
-    //         }
-    //     }
-    //
-    //     return elementToExtend.lastChild;
-    // }
 };

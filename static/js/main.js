@@ -3,7 +3,8 @@ function init() {
     // init data
     dataHandler.init();
     // loads the boards to the screen
-    dom.loadBoards();
+    //dom.loadBoards();
+    dom.showBoards();
     dom.eventHandler();
 
 }
