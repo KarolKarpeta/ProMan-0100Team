@@ -58,31 +58,45 @@ let dom = {
 
 
 // ----------------------BOARDS --------------------
-    loadBoards: function() {
-        // retrieves boards and makes showBoards called
-        dataHandler.getBoards(this.showBoards);
-    },
+//     loadBoards: function() {
+//         // retrieves boards and makes showBoards called
+//         dataHandler.getBoards(this.showBoards);
+//     },
 
-    showBoards: function(boards) {
+    showBoards: function() {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
-        let boardList = document.getElementById("accordionExample");
-        boardList.innerHTML = '';
 
-        for (let board of boards){
-            boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
+        let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://127.0.0.1:5000/get-boards', true);
+            xhr.responseText = 'text';
 
-            let newCardButton = $(`#new-card-${board.id}`);
-            newCardButton.click(function (ev){
-                console.log(ev.target);
-                let modal = document.getElementById("modal");
-                modal.dataset.boardId = board.id;
-            });
+            xhr.onload = function () {
+                boards = JSON.parse(xhr.response);
 
-            let boardAnchor = document.getElementById(`heading-${board.id}`);
-            boardAnchor.addEventListener('click', dom.loadCards);
-            dom.showCardsCounter(board.id);
-        }
+                let boardList = document.getElementById("accordionExample");
+                boardList.innerHTML = '';
+
+                for (let board of boards){
+                    boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
+
+                    let newCardButton = $(`#new-card-${board.id}`);
+                    newCardButton.click(function (ev){
+                        console.log(ev.target);
+                        let modal = document.getElementById("modal");
+                        modal.dataset.boardId = board.id;
+                    });
+
+                    let boardAnchor = document.getElementById(`heading-${board.id}`);
+                    console.log("test");
+                    boardAnchor.addEventListener('click', dom.showCards);
+                    dom.showCardsCounter(board.id);
+                }
+
+            };
+            xhr.send();
+
+
 
         let createModal = document.getElementById("my-modal");
         createModal.insertAdjacentHTML('beforeend', templates.getModal());
