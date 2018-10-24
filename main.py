@@ -5,9 +5,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def boards():
-    ''' this is a one-pager which shows all the boards and cards '''
-
-    print("USERS", data_manager.get_all_users())
     return render_template('boards.html')
 
 @app.route("/get-boards")
@@ -23,17 +20,13 @@ def get_cards_by_board_id(boardId):
     return jsonify(cards)
 
 
-
 @app.route("/update-status", methods=["POST"])
 def update_status():
-    print("Request form", request.form)
-
     cardId = request.form["cardId"]
     newStatus = request.form["newStatus"]
     newBoardId = request.form["newBoardId"]
 
     data_manager.update_status(cardId, newStatus, newBoardId)
-
     return "success"
 
 @app.route("/add-board", methods=["POST"])
@@ -46,7 +39,9 @@ def add_board():
 
 @app.route("/get-counter-board-id/<int:boardId>")
 def get_counter_by_board_id(boardId):
+    print()
     counter = data_manager.get_counter_by_board_id(boardId)
+    print("Counter: ", counter)
     return jsonify(counter)
 
 
