@@ -27,38 +27,51 @@ let dom = {
 
     addNewBoard: function() { // event handler function
             let title = document.getElementById("newBoardTitle").value;
-            if(title === "") {
+            if (title === "") {
                 alert("PLEASE FILL THE BOARD NAME!!!")
             }
             else {
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://127.0.0.1:5000/add-board', true);
-            xhr.responseText = 'text';
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {//Call a function when the state changes.
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText);
-                }
-            };
-            xhr.onload = function () {
-                dom.getBoards();
-            };
-            xhr.send(`title=${title}`);
-        }
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://127.0.0.1:5000/add-board', true);
+                xhr.responseText = 'text';
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {//Call a function when the state changes.
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                    }
+                };
+                xhr.onload = function () {
+                    dom.getBoards();
+                };
+                xhr.send(`title=${title}`);
+            }
 
     },
 
     addNewCard: function() {
-            let inputText = document.getElementById("user-input").value;
+            let title = document.getElementById("user-input").value;
             let boardId = parseInt(document.getElementById("modal").dataset.boardId);
+            let statusId = 1;
 
-            if (inputText === "") {
+            if (title === "") {
                 alert("PLEASE FILL THE BOARD NAME!!!")
             }
             else {
-                dataHandler.createNewCard(inputText, boardId, dom.showCards);
                 document.getElementById("user-input").value = "";
-            }
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://127.0.0.1:5000/add-card', true);
+                xhr.responseText = 'text';
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {//Call a function when the state changes.
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.responseText);
+                    }
+                };
+                // xhr.onload = function () {
+                //     dom.showCards();
+                // };
+            xhr.send(`title=${title}&boardId=${boardId}&statusId=${statusId}`);
+                }
         },
 
 
