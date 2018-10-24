@@ -64,19 +64,16 @@ let dom = {
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhr.onreadystatechange = function() {//Call a function when the state changes.
                     if(xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr.responseText);
+                    //console.log(xhr.responseText);
                     }
                 };
                 xhr.onload = function () {
                     let cards = JSON.parse(xhr.response);
-                    dom.showCards();
+                    dom.showCards(boardId);
                 };
             xhr.send(`title=${title}&boardId=${boardId}&statusId=${statusId}`);
                 }
         },
-
-
-    _boards: {},
 
 // ----------------------BOARDS --------------------
 //     loadBoards: function() {
@@ -110,7 +107,7 @@ let dom = {
             });
 
             let boardAnchor = document.getElementById(`heading-${board.id}`);
-            boardAnchor.addEventListener('click', dom.showCards);
+            boardAnchor.addEventListener('click', dom.checkEventAndCallShowCards);
             dom.showCardsCounter(board.id);
         }
 
@@ -159,10 +156,22 @@ let dom = {
             xhr.send(`cardId=${cardId}&newStatus=${newStatus}&newBoardId=${newBoardId}`);
         },
 
-    showCards: function(event) {
+    checkEventAndCallShowCards: function(event){
+        let boardId = parseInt(event.target.dataset.boardId);
+        dom.showCards(boardId)
+    },
+
+    showCards: function(boardId) {
         // shows the cards of a board
         // it adds necessary event listeners also
-        let boardId = parseInt(event.target.dataset.boardId);
+        // let boardId;
+        // if(!bID){
+        //
+        // }
+        // else{
+        //     boardId = bID;
+        // }
+
         let xhr = new XMLHttpRequest();
         xhr.open('GET', `http://127.0.0.1:5000/get-cards-board-id/${boardId}`, true);
         xhr.responseText = 'text';
