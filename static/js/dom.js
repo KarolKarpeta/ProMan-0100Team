@@ -67,9 +67,10 @@ let dom = {
                     console.log(xhr.responseText);
                     }
                 };
-                // xhr.onload = function () {
-                //     dom.showCards();
-                // };
+                xhr.onload = function () {
+                    let cards = JSON.parse(xhr.response);
+                    dom.showCards();
+                };
             xhr.send(`title=${title}&boardId=${boardId}&statusId=${statusId}`);
                 }
         },

@@ -45,15 +45,13 @@ def add_card():
     status_id = request.form["statusId"]
     data_manager.add_card(title, board_id, status_id)
 
-    get_cards_by_board_id(board_id)
-    return "success"
+    return get_cards_by_board_id(board_id)
 
 
 @app.route("/get-counter-board-id/<int:boardId>")
 def get_counter_by_board_id(boardId):
     print()
     counter = data_manager.get_counter_by_board_id(boardId)
-    print("Counter: ", counter)
     return jsonify(counter)
 
 
