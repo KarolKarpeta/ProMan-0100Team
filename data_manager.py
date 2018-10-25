@@ -49,3 +49,13 @@ def add_card(cursor, title, board_id, status_id):
                     INSERT INTO cards (title, board_id, status_id)
                     VALUES ('{}','{}','{}');
                     """.format(title, board_id, status_id))
+
+@database_common.connection_handler
+def check_user_login_and_password(cursor, login, password):
+    cursor.execute ("""
+                    SELECT id, name FROM users
+                    WHERE name = '{}'
+                    AND password = '{}';""".format(login, password)
+                    )
+    user_id_and_name = cursor.fetchall()
+    return user_id_and_name
