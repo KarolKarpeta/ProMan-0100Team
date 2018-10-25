@@ -18,22 +18,6 @@ let dom = {
             xhr.send();
         });
 
-        // let logOutButton = document.getElementById("log-out-button");
-        // logOutButton.addEventListener("click", function() {
-        //     console.log("klik");
-        //     let xhr = new XMLHttpRequest();
-        //         xhr.open('GET', 'http://127.0.0.1:5000/end-session', true);
-        //         xhr.responseText = 'text';
-        //         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        //         xhr.onload = function () {
-        //             console.log("przekierowuje");
-        //
-        //             window.location.replace("http://127.0.0.1:5000/");
-        //         };
-        //     xhr.send();
-        //
-        // });
-
         let box = document.getElementById("hide");
 
         box.addEventListener('change', function (e) {
@@ -89,17 +73,11 @@ let dom = {
                 xhr.open('POST', 'http://127.0.0.1:5000/add-card', true);
                 xhr.responseText = 'text';
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {//Call a function when the state changes.
-                    if(xhr.readyState == 4 && xhr.status == 200) {
-                    //console.log(xhr.responseText);
-                    }
-                };
                 xhr.onload = function () {
-                    let cards = JSON.parse(xhr.response);
                     dom.showCards(boardId);
-                };
-            xhr.send(`title=${title}&boardId=${boardId}&statusId=${statusId}`);
-                }
+                      };
+                xhr.send(`title=${title}&boardId=${boardId}&statusId=${statusId}`);
+                 }
         },
 
 // ----------------------BOARDS --------------------

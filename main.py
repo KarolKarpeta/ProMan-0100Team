@@ -77,20 +77,22 @@ def update_status():
 
 @app.route("/add-board", methods=["POST"])
 def add_board():
+    user_id = session['id']
+
     title = request.form["title"]
-    data_manager.add_board(title)
-    get_boards()
+    data_manager.add_board(title, user_id)
     return "success"
 
 
 @app.route("/add-card", methods=["POST"])
 def add_card():
+
     title = request.form["title"]
     board_id = request.form["boardId"]
     status_id = request.form["statusId"]
     data_manager.add_card(title, board_id, status_id)
 
-    return get_cards_by_board_id(board_id)
+    return "Success"
 
 
 @app.route("/get-counter-board-id/<int:boardId>")
