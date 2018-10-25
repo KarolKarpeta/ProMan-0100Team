@@ -32,14 +32,15 @@ def login():
 @app.route("/register", methods=["POST", "GET"])
 def register():
     #check if login and password is correct!
+    print(request.form)
     login = request.form['login']
     password = request.form['password']
     id_and_name = data_manager.check_user_login_and_password(login, password)
 
     if id_and_name != []:
-        flash('Username {login} already exists').format(login=login)
+        flash('Username {login} already exists'.format(login=login))
 
-        return redirect(url_for('register'))
+        return redirect(url_for('registration'))
     else:
         # place for function adding user to database
         user_id = len(data_manager.get_all_users()) + 1
