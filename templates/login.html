@@ -22,7 +22,7 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {%for message in messages %}
-                        <p id="error_message" style="color: red;">{{message}}</p>
+                        <h1 id="error_message" style="color: red; margin-top: 20px;">{{message}}</h1>
                     {%endfor%}
                 {% else %}
                     <i class="fas fa-blind fa-10x" style="margin-top: 20px;"></i>
