@@ -9,10 +9,11 @@ def get_all_users(cursor):
 
 
 @database_common.connection_handler
-def get_all_boards(cursor):
-    cursor.execute("""SELECT * FROM boards; """)
-    all_boards = cursor.fetchall()
-    return all_boards
+def get_all_boards_by_user_id(cursor, user_id):
+    cursor.execute("""SELECT * FROM boards 
+                      WHERE user_id = {};""".format(user_id))
+    all_boards_by_user_id = cursor.fetchall()
+    return all_boards_by_user_id
 
 
 @database_common.connection_handler
