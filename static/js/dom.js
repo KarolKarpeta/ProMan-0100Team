@@ -53,7 +53,6 @@ let dom = {
                 };
                 xhr.send(`title=${title}`);
             }
-
     },
 
     addNewCard: function() {
@@ -123,6 +122,7 @@ let dom = {
     drag: function(dragevent) {
         dragevent.dataTransfer.setData("element-id", dragevent.target.id);
         dragevent.dataTransfer.setData("board-id", dragevent.target.dataset.board_id);
+
     },
 
     drop: function(dropevent, newStatus, newBoardId) {
@@ -154,6 +154,7 @@ let dom = {
     },
 
     showCards: function(boardId) {
+
         let xhr = new XMLHttpRequest();
         xhr.open('GET', `http://127.0.0.1:5000/get-cards-board-id/${boardId}`, true);
         xhr.responseText = 'text';
