@@ -37,11 +37,13 @@ def get_counter_by_board_id(cursor, boardId ):
 
 
 @database_common.connection_handler
-def add_board(cursor, title):
+def add_board(cursor, title, user_id):
     cursor.execute ("""
-                    INSERT INTO boards (title)
-                    VALUES ('{}');
-                    """.format(title))
+                    INSERT INTO boards (title, user_id)
+                    VALUES ('{}','{}');
+                    """.format(title, user_id))
+
+
 
 @database_common.connection_handler
 def add_card(cursor, title, board_id, status_id):
