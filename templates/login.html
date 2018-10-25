@@ -8,9 +8,9 @@
                     <form id="loginForm" action="{{ url_for('login') }}" method="POST" class="form-inline ml-auto">
                         <input  id="login" name="login" class="form-control mr-sm-2" type="text" placeholder="login...." required>
                         <input  id="password" name="password" class="form-control mr-sm-2" type="password" placeholder="password..." required>
-                        <button id="loginButton" class="btn btn-dark" type="submit">LOGIN</button>
-                        <a href="{{ url_for('registration') }}">
-                        <button id="registerButton" class="btn btn-dark" type="button">REGISTER</button>
+                        <button  id="loginButton" class="btn btn-outline-warning" type="submit">LOGIN</button>
+                        <a style="margin-left: 10px;" href="{{ url_for('registration') }}">
+                            <button id="registerButton" class="btn btn-outline-warning" type="button">REGISTER</button>
                         </a>
 
                 </form>

@@ -34,6 +34,7 @@ def register():
     #check if login and password is correct!
     print(request.form)
     login = request.form['login']
+    login = login.upper()
     password = request.form['password']
     id_and_name = data_manager.check_user_login_and_password(login, password)
 
