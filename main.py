@@ -16,30 +16,23 @@ def login():
     #check if login and password is correct!
     login = request.form['login']
     password = request.form['password']
-
     id_and_name = data_manager.check_user_login_and_password(login, password)
 
-    print("DANE",id_and_name)
-
-    if id_and_name==[]:
+    if id_and_name == []:
         flash('User login or password are incorrect')
+
         return redirect(url_for('start'))
     else:
-        #session['logged_in'] = True
         session['username'] = id_and_name[0]['name']
         session['id'] = id_and_name[0]['id']
-
-        print("id",  session['username'])
-        print("name", session['id'])
-
 
         return redirect(url_for('boards') )
 
 @app.route("/end-session")
 def end_session():
     session.clear()
-    return "success"
 
+    return "success"
 
 
 @app.route("/boards")
@@ -54,14 +47,15 @@ def get_boards():
         id = session['id']
     else:
         id = 1
-
     boards = data_manager.get_all_boards_by_user_id(id)
+
     return jsonify(boards)
 
 
 @app.route("/get-cards-board-id/<int:boardId>")
 def get_cards_by_board_id(boardId):
     cards = data_manager.get_cards_by_board_id(boardId)
+
     return jsonify(cards)
 
 
@@ -70,23 +64,22 @@ def update_status():
     cardId = request.form["cardId"]
     newStatus = request.form["newStatus"]
     newBoardId = request.form["newBoardId"]
-
     data_manager.update_status(cardId, newStatus, newBoardId)
+
     return "success"
 
 
 @app.route("/add-board", methods=["POST"])
 def add_board():
     user_id = session['id']
-
     title = request.form["title"]
     data_manager.add_board(title, user_id)
+
     return "success"
 
 
 @app.route("/add-card", methods=["POST"])
 def add_card():
-
     title = request.form["title"]
     board_id = request.form["boardId"]
     status_id = request.form["statusId"]
@@ -98,9 +91,8 @@ def add_card():
 @app.route("/get-counter-board-id/<int:boardId>")
 def get_counter_by_board_id(boardId):
     counter = data_manager.get_counter_by_board_id(boardId)
+
     return jsonify(counter)
-
-
 
 
 def main():

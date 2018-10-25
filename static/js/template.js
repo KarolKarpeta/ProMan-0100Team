@@ -1,6 +1,4 @@
-
 let templates = {
-
         getAccordion: function(board){
             return `  
                <div class="card board-${board.id}">
@@ -24,43 +22,30 @@ let templates = {
                         
                               <div class="card border mb-3" style="max-width: 18rem;">
                                   <div class="card-header bg-warning"><i class="fas fa-sign-in-alt"></i> &nbsp; NEW</div>
-                                  
                                   <div id="board-${board.id}-status-1" class="card-body text-dark" ondrop="dom.drop(event, 1, ${board.id} )" ondragover="dom.allowDrop(event)">
-                                            <!--content-->   
                                   </div>
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
                                   <div class="card-header bg-secondary"><i class="fas fa-spinner"></i> &nbsp; IN PROGRESS</div>
-                                  
                                   <div id="board-${board.id}-status-2" class="card-body text-dark" ondrop="dom.drop(event, 2, ${board.id})" ondragover="dom.allowDrop(event)">
-                                            <!--content-->
                                   </div>
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
                                   <div class="card-header bg-info"><i class="far fa-comments"></i> &nbsp; TESTING</div>
-                                  
                                   <div id="board-${board.id}-status-3" class="card-body text-dark" ondrop="dom.drop(event, 3, ${board.id})" ondragover="dom.allowDrop(event)">
-                                            <!--content--> 
                                   </div>
                               </div>
                               
                               <div class="card border mb-3" style="max-width: 18rem;">
                                   <div class="card-header bg-success"><i class="far fa-check-square"></i> &nbsp; DONE</div>
-                                  
                                   <div id="board-${board.id}-status-4" class="card-body text-dark" ondrop="dom.drop(event, 4, ${board.id})" ondragover="dom.allowDrop(event)">
-                                            <!--content--> 
                                   </div>
                               </div>
-
-                        </div>
-                        
-                        
-                        
+                        </div>    
                   </div>
                 </div>
-        
             </div> `
         },
 
