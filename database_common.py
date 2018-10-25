@@ -8,7 +8,7 @@ def get_connection_string():
     user_name = os.environ.get('PSQL_USER_NAME', 'student')
     password = os.environ.get('PSQL_PASSWORD', 'codecool')
     host = os.environ.get('PSQL_HOST', 'localhost')
-    database_name = os.environ.get('PSQL_DB_NAME', 'student')
+    database_name = os.environ.get('PSQL_DB_NAME', 'proman')
 
     env_variables_defined = user_name and password and host and database_name
 
