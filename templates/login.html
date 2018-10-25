@@ -7,26 +7,27 @@
 
 
                 <form id="loginForm" action="{{ url_for('login') }}" method="POST" class="form-inline ml-auto">
-                    <input  id="login" class="form-control mr-sm-2" type="text" placeholder="login...." required>
-                    <input  id="password" class="form-control mr-sm-2" type="password" placeholder="password..." required>
+                    <input  id="login" name="login" class="form-control mr-sm-2" type="text" placeholder="login...." required>
+                    <input  id="password" name="password" class="form-control mr-sm-2" type="password" placeholder="password..." required>
 
-                    <button id="loginButton" class="btn btn-dark" type="submit" onclick="dataHandler.sendLogin()">LOGIN</button>
+                    <button id="loginButton" class="btn btn-dark" type="submit">LOGIN</button>
                     <button id="registerButton" class="btn btn-dark" type="button">REGISTER</button>
                 </form>
             </nav>
      </div>
 
     <div align="center">
-        <i class="fas fa-blind fa-10x" style="margin-top: 20px;"></i>
-        <p style="font-size: 50px;margin-top: 20px;"> Pro Man - 0011.Edition</p>
-        <p style="font-size: 30px;margin-top: 10px;"><strong>Barbara</strong> Bochińska,   <strong>Karol</strong> Karpeta,   <strong>Kamil</strong> Woś </p>
 
         <div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {%for message in messages %}
-                        <p id="error_message">{{message}}</p>
+                        <p id="error_message" style="color: red;">{{message}}</p>
                     {%endfor%}
+                {% else %}
+                    <i class="fas fa-blind fa-10x" style="margin-top: 20px;"></i>
+                    <p style="font-size: 50px;margin-top: 20px;"> Pro Man - 0011.Edition</p>
+                    <p style="font-size: 30px;margin-top: 10px;"><strong>Barbara</strong> Bochińska,   <strong>Karol</strong> Karpeta,   <strong>Kamil</strong> Woś </p>
                 {%endif%}
             {%endwith%}
         </div>
