@@ -68,8 +68,9 @@ def registration():
 
 @app.route("/boards")
 def boards():
+    name = session['username'].upper()
 
-    return render_template('boards.html')
+    return render_template('boards.html', name=name)
 
 
 @app.route("/get-boards")

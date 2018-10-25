@@ -49,6 +49,7 @@ let dom = {
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
                 xhr.onload = function () {
+                    document.getElementById("newBoardTitle").value = "";
                     dom.getBoards();
                 };
                 xhr.send(`title=${title}`);
