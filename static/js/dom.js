@@ -56,7 +56,6 @@ let dom = {
                 };
                 xhr.send(`title=${title}`);
             }
-
     },
 
     addNewCard: function() {
@@ -79,12 +78,6 @@ let dom = {
                 xhr.send(`title=${title}&boardId=${boardId}&statusId=${statusId}`);
                  }
         },
-
-// ----------------------BOARDS --------------------
-//     loadBoards: function() {
-//         // retrieves boards and makes showBoards called
-//         dataHandler.getBoards(this.showBoards);
-//     },
 
     getBoards: function() {
         let xhr = new XMLHttpRequest();
@@ -129,11 +122,8 @@ let dom = {
         },
 
     drag: function(dragevent) {
-        //console.log("dragevent.target.board_id", dragevent.target.dataset.board_id);
-
         dragevent.dataTransfer.setData("element-id", dragevent.target.id);
         dragevent.dataTransfer.setData("board-id", dragevent.target.dataset.board_id);
-
         //dragevent.target.style.color = 'green';
     },
 
@@ -167,15 +157,6 @@ let dom = {
     },
 
     showCards: function(boardId) {
-        // shows the cards of a board
-        // it adds necessary event listeners also
-        // let boardId;
-        // if(!bID){
-        //
-        // }
-        // else{
-        //     boardId = bID;
-        // }
 
         let xhr = new XMLHttpRequest();
         xhr.open('GET', `http://127.0.0.1:5000/get-cards-board-id/${boardId}`, true);
@@ -196,9 +177,6 @@ let dom = {
 
                     el.setAttribute('id', card.id);
                     el.dataset.board_id = card.board_id;
-                    //el.setAttribute('board_id', card.board_id);
-                    //el.setAttribute('status', card.status_id);
-
                     el.setAttribute('draggable', 'true');
                     el.setAttribute('ondragstart', 'dom.drag(event)');
 
