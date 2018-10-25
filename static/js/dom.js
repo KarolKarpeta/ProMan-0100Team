@@ -7,6 +7,33 @@ let dom = {
         let addCardModal = document.getElementById("add-card-modal");
         addCardModal.addEventListener("click", this.addNewCard);
 
+        let logOutButton = document.getElementById("log-out-button");
+        logOutButton.addEventListener("click", function() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://127.0.0.1:5000/end-session', true);
+            xhr.responseText = 'text';
+            xhr.onload = function () {
+                window.location.replace("http://127.0.0.1:5000/");
+                };
+            xhr.send();
+        });
+
+        // let logOutButton = document.getElementById("log-out-button");
+        // logOutButton.addEventListener("click", function() {
+        //     console.log("klik");
+        //     let xhr = new XMLHttpRequest();
+        //         xhr.open('GET', 'http://127.0.0.1:5000/end-session', true);
+        //         xhr.responseText = 'text';
+        //         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //         xhr.onload = function () {
+        //             console.log("przekierowuje");
+        //
+        //             window.location.replace("http://127.0.0.1:5000/");
+        //         };
+        //     xhr.send();
+        //
+        // });
+
         let box = document.getElementById("hide");
 
         box.addEventListener('change', function (e) {
