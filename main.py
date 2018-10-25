@@ -1,9 +1,19 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect, url_for
 import data_manager
 app = Flask(__name__)
 
-
 @app.route("/")
+def start():
+    return render_template('login.html')
+
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    #check if login and password is correct!
+    return redirect("/boards")
+
+@app.route("/boards")
 def boards():
     return render_template('boards.html')
 
