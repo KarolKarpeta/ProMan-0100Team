@@ -12,6 +12,7 @@ let dom = {
             let xhr = new XMLHttpRequest();
             xhr.open('GET', 'http://127.0.0.1:5000/end-session', true);
             xhr.responseText = 'text';
+
             xhr.onload = function () {
                 window.location.replace("http://127.0.0.1:5000/");
                 };
@@ -36,7 +37,7 @@ let dom = {
         })
     },
 
-    addNewBoard: function() { // event handler function
+    addNewBoard: function() {
             let title = document.getElementById("newBoardTitle").value;
             if (title === "") {
                 alert("PLEASE FILL THE BOARD NAME!!!")
@@ -46,11 +47,7 @@ let dom = {
                 xhr.open('POST', 'http://127.0.0.1:5000/add-board', true);
                 xhr.responseText = 'text';
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {//Call a function when the state changes.
-                    if(xhr.readyState == 4 && xhr.status == 200) {
-                    console.log(xhr.responseText);
-                    }
-                };
+
                 xhr.onload = function () {
                     dom.getBoards();
                 };
@@ -72,6 +69,7 @@ let dom = {
                 xhr.open('POST', 'http://127.0.0.1:5000/add-card', true);
                 xhr.responseText = 'text';
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
                 xhr.onload = function () {
                     dom.showCards(boardId);
                       };
@@ -95,7 +93,7 @@ let dom = {
         let boardList = document.getElementById("accordionExample");
         boardList.innerHTML = '';
 
-        for (let board of boards){
+        for (let board of boards) {
             boardList.insertAdjacentHTML('beforeend', templates.getAccordion(board));
 
             let newCardButton = $(`#new-card-${board.id}`);
@@ -124,7 +122,7 @@ let dom = {
     drag: function(dragevent) {
         dragevent.dataTransfer.setData("element-id", dragevent.target.id);
         dragevent.dataTransfer.setData("board-id", dragevent.target.dataset.board_id);
-        //dragevent.target.style.color = 'green';
+
     },
 
     drop: function(dropevent, newStatus, newBoardId) {
@@ -144,7 +142,6 @@ let dom = {
                 let movedCard = document.getElementById(cardId);
                 movedCard.setAttribute('data-board_id', newBoardId);
                 dropevent.target.appendChild(movedCard);
-
                 dom.showCardsCounter(newBoardId);
                 dom.showCardsCounter(oldboardId);
             };
@@ -174,14 +171,11 @@ let dom = {
                 for (let card of cards) {
                     let statusDiv = document.getElementById(`board-${card.board_id}-status-${card.status_id}`);
                     let el = document.createElement("div");
-
                     el.setAttribute('id', card.id);
                     el.dataset.board_id = card.board_id;
                     el.setAttribute('draggable', 'true');
                     el.setAttribute('ondragstart', 'dom.drag(event)');
-
                     el.innerText = card.title;
-
                     el.classList.add("border");
                     el.classList.add("text-center");
 

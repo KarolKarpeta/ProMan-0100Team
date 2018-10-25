@@ -52,6 +52,15 @@ def add_card(cursor, title, board_id, status_id):
                     VALUES ('{}','{}','{}');
                     """.format(title, board_id, status_id))
 
+
+@database_common.connection_handler # to be finished
+def add_user(cursor, user_id, user_login, user_password):
+    cursor.execute ("""
+                    INSERT INTO users (id, name, password)
+                    VALUES ('{}', '{}','{}');
+                    """.format(user_id, user_login, user_password))
+
+
 @database_common.connection_handler
 def check_user_login_and_password(cursor, login, password):
     cursor.execute ("""
